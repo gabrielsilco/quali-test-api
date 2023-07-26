@@ -13,8 +13,18 @@ module.exports = (server) => {
                         const patient = record.get('patient');
                         return {
                             id: patient.identity.low,
-                            name: patient.properties.name,
-                            age: patient.properties.age,
+                            fullName: patient.properties.fullName,
+                            dateOfBirth: patient.properties.dateOfBirth,
+                            cpf: patient.properties.cpf,
+                            weight: patient.properties.weight,
+                            height: patient.properties.height,
+                            occupation: patient.properties.occupation,
+                            everBeenAdmitted: patient.properties.everBeenAdmitted,
+                            sports: patient.properties.sports,
+                            familyHistory: patient.properties.familyHistory,
+                            city: patient.properties.city,
+                            state: patient.properties.state,
+                            country: patient.properties.country
                         }
                     })
                     res.json(patients)
@@ -37,8 +47,18 @@ module.exports = (server) => {
                     const patient = result.records[0].get('patient');
                     res.json({
                         id: patient.identity.low,
-                        name: patient.properties.name,
-                        age: patient.properties.age,
+                        fullName: patient.properties.fullName,
+                        dateOfBirth: patient.properties.dateOfBirth,
+                        cpf: patient.properties.cpf,
+                        weight: patient.properties.weight,
+                        height: patient.properties.height,
+                        occupation: patient.properties.occupation,
+                        everBeenAdmitted: patient.properties.everBeenAdmitted,
+                        sports: patient.properties.sports,
+                        familyHistory: patient.properties.familyHistory,
+                        city: patient.properties.city,
+                        state: patient.properties.state,
+                        country: patient.properties.country
                     })
                 })
         } catch (error) {
