@@ -49,9 +49,49 @@ module.exports = (server) => {
     // CREATE PATIENT
     server.post('/patients', async (req, res) => {
         try {
-            const { name, age } = req.body;
+            const {
+                fullName,
+                dateOfBirth,
+                cpf,
+                weight,
+                height,
+                occupation,
+                everBeenAdmitted,
+                sports,
+                familyHistory,
+                city,
+                state,
+                country
+            } = req.body;
             await session
-                .run('CREATE (patient:Patient {name: $name, age: $age}) RETURN patient', { name, age })
+                .run(`CREATE (patient:Patient {
+                        fullName: $fullName,
+                        dateOfBirth: $dateOfBirth,
+                        cpf: $cpf,
+                        weight: $weight,
+                        height: $height,
+                        occupation: $occupation,
+                        everBeenAdmitted: $everBeenAdmitted,
+                        sports: $sports,
+                        familyHistory: $familyHistory,
+                        city: $city,
+                        state: $state,
+                        country: $country
+                    }) RETURN patient`
+                    , {
+                        fullName,
+                        dateOfBirth,
+                        cpf,
+                        weight,
+                        height,
+                        occupation,
+                        everBeenAdmitted,
+                        sports,
+                        familyHistory,
+                        city,
+                        state,
+                        country
+                })
                 .then((result) => {
                     const createdPatient = result.records[0].get('patient').properties;
                     res.json(createdPatient);
