@@ -127,20 +127,60 @@ module.exports = (server) => {
     // UPDATE PATIENT
     server.put('/patients/:id', async (req, res) => {
         const nodeId = req.params.id;
-        const { name, age } = req.body;
+        const {
+            weight,
+            height,
+            occupation,
+            everBeenAdmitted,
+            sports,
+            familyHistory,
+            city,
+            state,
+            country
+        } = req.body;
         try {
             await session
-                .run('MATCH (patient) WHERE ID(patient) = $id SET patient.name = $name, patient.age = $age RETURN patient',{
+                .run(`MATCH (patient)
+                    WHERE ID(patient) = $id
+                    SET patient.weight = $weight,
+                    patient.height = $height,
+                    patient.occupation = $occupation,
+                    patient.everBeenAdmitted = $everBeenAdmitted,
+                    patient.sports = $sports,
+                    patient.familyHistory = $familyHistory,
+                    patient.city = $city,
+                    patient.state = $state,
+                    patient.country = $country
+                    RETURN patient`,
+                {
                     id: neo4j.int(nodeId),
-                    name,
-                    age,
+                    weight,
+                    height,
+                    occupation,
+                    everBeenAdmitted,
+                    sports,
+                    familyHistory,
+                    city,
+                    state,
+                    country
                 })
                 .then((result) => {
+                    console.log(result)
                     const patient = result.records[0].get('patient');
                     res.json({
                         id: patient.identity.low,
-                        name: patient.properties.name,
-                        age: patient.properties.age,
+                        fullName: patient.properties.fullName,
+                        dateOfBirth: patient.properties.dateOfBirth,
+                        cpf: patient.properties.cpf,
+                        weight: patient.properties.weight,
+                        height: patient.properties.height,
+                        occupation: patient.properties.occupation,
+                        everBeenAdmitted: patient.properties.everBeenAdmitted,
+                        sports: patient.properties.sports,
+                        familyHistory: patient.properties.familyHistory,
+                        city: patient.properties.city,
+                        state: patient.properties.state,
+                        country: patient.properties.country
                     })
                 })
         } catch (error) {
@@ -158,8 +198,6 @@ module.exports = (server) => {
                     const patient = result.records[0].get('patient');
                     res.json({
                         id: patient.identity.low,
-                        name: patient.properties.name,
-                        age: patient.properties.age,
                     })
                 })
         } catch (error) {
