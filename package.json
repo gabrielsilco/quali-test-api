@@ -9,6 +9,7 @@
   "author": "Gabriel Silva Costa",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "neo4j-driver": "^5.10.0",
     "restify": "^11.1.0"
   }
