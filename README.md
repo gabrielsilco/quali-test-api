@@ -6,7 +6,7 @@ Esta aplicação é um teste para a empresa Qualicorp. Trata-se de um CRUD para 
 
 ## Dificuldades
 
-As maiores dificuldades no desenvolvimento desta aplicação foi em relação ao uso do Neo4J. Precisei ler bastante a documentação oficial para configurar e realizar as queries corretamente.
+As maiores dificuldades no desenvolvimento desta aplicação foi em relação ao uso do Neo4J. Precisei ler bastante a documentação oficial para configurar e realizar as queries corretamente. Também houve muitos erros tentando utilizar a versão 10.x do NodeJS, por isso foi necessário utilizar a versão 16.x.
 
 ## Facilidades
 
